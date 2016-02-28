@@ -4,28 +4,32 @@
 	<meta charset="UTF-8" />
 	<title>Alcance</title>
 	<script type="text/javascript">
-		// see => https://developer.mozilla.org/es/docs/Web/JavaScript/Guide/Trabajando_con_objectos
+		// evironment => https://developer.mozilla.org/es/docs/Web/JavaScript/Guide/Trabajando_con_objectos
 		
 		function info() {
+			// this => tomara el lugar del objeto que hace la llamada, 
+			// this => se suele utilizar dentro de los metodos de un objeto
 			console.log('\n', 'Nombre: ', this.nombre, '\n', 'Edad: ', this.edad)
 		}
+
+		// method => http://librosweb.es/libro/ajax/capitulo_3.html
 
 		var p1 = {
 			nombre: 'JL Damian',
 			edad: 25,
-			info: info
+			info: info // metodo =>  se definen asignando funciones al objeto
 		}
 
 		var p2 = {
 			nombre:  'AD Ayala',
 			edad: 28,
-			info: info
+			info: info // metodo =>  se definen asignando funciones al objeto
 		}
 
 		function Persona(nombre, edad) {
 		  this.nombre = nombre;
 		  this.edad = edad;
-		  this.info = info;
+		  this.info = info; // metodo =>  se definen asignando funciones al objeto
 		}
 
 		var p3 = new Persona('CE Damian', 18)
