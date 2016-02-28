@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="EN">
+<head>
+	<meta charset="UTF-8" />
+	<title>Alcance</title>
+	<script type="text/javascript">
+		// see => https://developer.mozilla.org/es/docs/Web/JavaScript/Guide/Trabajando_con_objectos
+		
+		function info() {
+			console.log('\n', 'Nombre: ', this.nombre, '\n', 'Edad: ', this.edad)
+		}
+
+		var p1 = {
+			nombre: 'JL Damian',
+			edad: 25,
+			info: info
+		}
+
+		var p2 = {
+			nombre:  'AD Ayala',
+			edad: 28,
+			info: info
+		}
+
+		function Persona(nombre, edad) {
+		  this.nombre = nombre;
+		  this.edad = edad;
+		  this.info = info;
+		}
+
+		var p3 = new Persona('CE Damian', 18)
+		var p4 = new Persona('ES Armas', 18)
+
+		p1.info()
+		p2.info()
+		p3.info()
+		p4.info()
+
+	</script>
+</head>
+<body>
+
+</body>
+</html>
