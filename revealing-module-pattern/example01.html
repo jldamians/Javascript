@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="EN">
+<head>
+	<meta charset="UTF-8" />
+	<title>Patrón Módulo</title>
+	<script type="text/javascript">
+		// creamos un scope dentro de la funcion, evitando así contaminar el ambito global
+		// see => http://hardcoders.mx/blog/2014/09/12/patron-modulo-en-javascript-module-pattern/
+
+
+		var myModule = (function () {
+			var _count = 0
+
+			var _modificar = function (value) {
+				_count += value 
+			}
+
+			var _mensaje = function () {
+				console.log('Valor actual => ', _count)
+			}
+
+			var incremento = function () {
+				console.log('incremento')
+				_modificar(+1) 
+			}
+
+			var decremento = function () {
+				console.log('decremento')
+				_modificar(-1)
+			}
+
+			return {
+				titulo: "Patrón Módulo",
+				incremento: incremento,
+				decremento: decremento,
+				mensaje: _mensaje // alias de _mensaje
+			}
+		})();
+
+		console.log(myModule.titulo)
+		myModule.mensaje()
+		myModule.incremento()
+		myModule.incremento()
+		myModule.mensaje()
+		myModule.decremento()
+		myModule.mensaje()
+	</script>
+</head>
+<body>
+
+</body>
+</html>
