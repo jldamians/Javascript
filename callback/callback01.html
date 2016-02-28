@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="EN">
+<head>
+	<meta charset="UTF-8" />
+	<title>Callback's</title>
+	<!-- Traemos la coleccion de objetos -->
+	<script src="./objectsList.js"></script>
+
+	<!-- Traemos los filtros -->
+	<script src="./filter.js"></script>
+
+	<script type="text/javascript">
+		
+	function filter(array, callback) {
+		var resultFilter = [] 
+
+		array.forEach(function(element){
+			// primero validamos que callback sea una funcion y no otro valor
+			if ( typeof callback === 'function' && callback(element) ) {
+				resultFilter.push(element)
+			}
+		}) 
+
+		return resultFilter
+	}
+
+	console.log('Natacion', filter(personas, function(persona){
+		return persona.deporte === 'Natacion'
+	}))
+
+	console.log('25 Años', filter(personas, filterEdadMayor25))
+
+	console.log('Lima y Chilayo', filter(personas, filterCiudadLimaAndChiclayo))
+
+	</script>
+</head>
+<body>
+
+</body>
+</html>
