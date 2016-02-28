@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="EN">
+<head>
+	<meta charset="UTF-8" />
+	<title>Patrón Módulo</title>
+	<script src="https://code.jquery.com/jquery-2.2.1.min.js"></script>
+	<script type="text/javascript">
+		var tabs = (function() {
+		  var st = {
+		    tabs: '.tabs',
+		    tabs_item: '.tabs_item',
+		    tabs_item_target: '.tabs_item_target'
+		  };
+
+		  var dom = {}
+
+		  var catchDom = function() {
+		    dom.tabs_item_target = $(st.tabs_item_target, st.tabs); // buscar ".tabs_item_target" dentro de ".tabs"
+		  };
+
+		  var suscribeEvents = function() {
+		    dom.tabs_item_target.on('click', events.eSelectedTab);
+		  };
+
+		  var events = {
+		    eSelectedTab: function(e) {
+		      self = $(this); // elemento que llama a la funcion
+		      self.addClass('is_selected'); // se agrega una clase al elemento que llama la funcion
+		      var brother = self.parent(st.tabs_item).siblings(); // siblings => permite obtener los elementos hermanos del elemento que desencadeno la funcion
+		      $(st.tabs_item_target, brother).removeClass('is_selected'); // remueve las clase "is_selected" de los hermano del elemento que desencadeno la funcion
+		      var pane = self.attr('data-tab'); // obtiene el valor del atributo "data-tab" del elemento que desencadeno la funcion
+		      $("#" + pane).addClass('is_active'); // agrega la clase "is_active" el contenido relacionado al tab seleccionado
+		      $("#" + pane).siblings().removeClass('is_active'); // quita la clase "is_active" a los elementos hermanos del elemento seleccionado
+		    }
+		  };
+
+		  var initialize = function() {
+		    catchDom();
+		    suscribeEvents();
+		  };
+
+		  return {
+		    init: initialize
+		  }
+		})();
+
+		window.onload = function(){
+			tabs.init();			
+		}
+
+	</script>
+	<style type="text/css">
+		* {
+		  font-family: arial;
+		  text-align: center;
+		  box-sizing: border-box;
+		}
+
+		.titulo {
+		  color: #212121;
+		  margin-bottom: 50px;
+		}
+
+		.tabs {
+		  padding: 0;
+		  margin: 0;
+		  font-size: 0;
+		  text-align: center;
+		  width: 600px;
+		  margin: 0 auto;
+		}
+
+		.tabs_item {
+		  color: white;
+		  display: inline-block;
+		}
+
+		.tabs_item_target {
+		  cursor: pointer;
+		  text-decoration: none;
+		  padding: 15px;
+		  display: block;
+		  background-color: #849C83;
+		  color: #D5DADB;
+		  text-transform: uppercase;
+		  width: 200px;
+		  font-size: 16px;
+		}
+
+		.tabs_content {
+		  margin: 0 auto;
+		  width: 600px;
+		  border-top: none;
+		  padding: 40px 20px;
+		  box-shadow: 0 1px 4px 0 rgba(0, 0, 0, 0.37);
+		}
+
+		.tabs_content_pane {
+		  line-height: 25px;
+		  text-align: left;
+		  display: none;
+		  color: #616161;
+		}
+
+		.is_active {
+		  display: block;
+		}
+
+		.is_selected {
+		  color: white;
+		  box-shadow: inset 0px -5px 0px 0px #E9821D;
+		}
+	</style>
+</head>
+<body>
+	<h1 class="titulo">Aplicando Patron Modulo</h1>
+	<ul class="tabs">
+	  <li class="tabs_item">
+	    <a class="tabs_item_target is_selected" data-tab="tab_one">JavaScript</a>
+	  </li>
+	  <li class="tabs_item">
+	    <a class="tabs_item_target" data-tab="tab_two">Html</a>
+	  </li>
+	  <li class="tabs_item">
+	    <a class="tabs_item_target" data-tab="tab_three">Css</a>
+	  </li>
+	</ul>
+	<div class="tabs_content">
+	  <div id="tab_one" class="tabs_content_pane is_active">
+	    Contenido javascript
+	  </div>
+	  <div id="tab_two" class="tabs_content_pane">
+	    Contenido html
+	  </div>
+	  <div id="tab_three" class="tabs_content_pane">
+	    Contenido css
+	  </div>
+	</div>
+</body>
+</html>
